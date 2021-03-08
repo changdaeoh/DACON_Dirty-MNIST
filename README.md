@@ -60,7 +60,7 @@ Adam과 Nadam등과 정밀한 성능비교를 해보지는 못했다.
 대부분의 후보모델 학습 진행과정에서 어느 정도 epoch 이후부터는 validation loss의 감소가 saturated 되던 현상이<br/>
 `Cosine Annealing with Warm Restarts` 를 적용함으로써 해소되는 듯 보였다.<br/>
 > 그러나 이러한 scheduling 전략들간의 차이와 각 전략이 모델성능에 미치는 영향력을 타당하게 판단/평가하기 위해서는<br/>
-**충분한 epoch의 학습**을 진행시켜봐야했을 것이다. (특히 Cosine Decay Restarts)<br/>
+**충분한 epoch의 학습**을 진행시켜봐야했을 것이다. (특히 주기를 갖는 Cosine Decay Restarts)<br/>
 아쉽게도 colab의 runtime limitation 때문에 이는 이뤄지지 못했다.
 
 <br/>
@@ -80,3 +80,9 @@ Adam과 Nadam등과 정밀한 성능비교를 해보지는 못했다.
 ### 4.1 Test Time Augmentation
 ### 4.2 Monte Carlo Dropout
 ### 4.3 Ensemble
+
+<br/><br/>
+
+---
+
+## Comment
