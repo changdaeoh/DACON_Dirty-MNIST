@@ -19,6 +19,8 @@ ImageDataGenerator(rescale=1./255.,
                              validation_split = 0.1)
 ```
 
+<br/><br/>
+
 ## 2. Model Candidates 
 인기있는 CNN 구조들을 그대로 가져와 head 부분만 바꿔서 사용. 
 * VGG
@@ -61,7 +63,7 @@ Adam과 Nadam등과 성능비교를 수치적으로 정밀하게 해보지는 �
 **충분한 epoch의 학습**을 진행시켜봐야했을 것이다. (특히 Cosine Decay Restarts)<br/>
 아쉽게도 colab의 runtime limitation 때문에 이는 이뤄지지 못했다.
 
-<br/><br/>
+<br/>
 
 ### 3.3 Loss
 - Binary Cross Entropy
