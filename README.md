@@ -11,12 +11,12 @@ framework : TF/Keras(창대, 희지), Pytorch(재훈)
 - scaling과 augmentation은 keras의 ImageDataGenerator 이용.
 ```python 
 ImageDataGenerator(rescale=1./255.,
-                             rotation_range = 10,
-                             width_shift_range = 0.1,
-                             height_shift_range = 0.1,
-                             horizontal_flip = True,
-                             vertical_flip = True,
-                             validation_split = 0.1)
+                   rotation_range = 10,
+                   width_shift_range = 0.1,
+                   height_shift_range = 0.1,
+                   horizontal_flip = True,
+                   vertical_flip = True,
+                   validation_split = 0.1)
 ```
 
 <br/><br/>
@@ -48,7 +48,7 @@ ImageDataGenerator(rescale=1./255.,
 optimizer로는 오직 adam의 변형들만 고려하였다.<br/>
 대부분의 후보 모델에서 adam보다 nadam이 더 빨리 loss를 줄여나갔으며,<br/>
 마감일이 임박했을 때, RAdam와 AdamW 등의 비교적 낯선(?) optimizer를 추가적으로 시도해 보았으나<br/>
-Adam과 Nadam등과 성능비교를 수치적으로 정밀하게 해보지는 못했다.
+Adam과 Nadam등과 정밀한 성능비교를 해보지는 못했다.
 <br/><br/>
 
 ### 3.2 LR schedule
