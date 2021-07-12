@@ -22,8 +22,8 @@ ImageDataGenerator(rescale=1./255.,
 <br/><br/>
 
 ## 2. Model Candidates 
-인기있는 CNN 구조들을 그대로 가져와 head 부분만 바꿔서 사용. 
-* VGG
+popular한 CNN 기반 모델들을 그대로 가져와 head 부분만 바꿔서 사용. 
+* VGG variants
 * Resnets (50, 101, 152 ...)    
 * InceptionResnet v2
 * DenseNets
@@ -31,13 +31,13 @@ ImageDataGenerator(rescale=1./255.,
 * EfficientNets (B0, B1, ... B7)
 * Vision Transformer
 
-& Classification head (MLP) <BR/>
+with Classification head (MLP) <BR/>
 
 
 <br/><br/>
 
 ## 3. Training
-각 후보 모델별로 약 50 ~ 100 epoch씩 탐색적인 학습 진행. <br/>
+각 후보 모델별로 약 50 ~ 100 epoch씩 짧은 탐색적 학습 진행. <br/>
 성능이 우수하였던 `InceptionResnet v2, DenseNets, EfficientNetsB4,B5` 위주로 튜닝 진행. <br/><br/>
 
 ### 3.1 Optimizer
@@ -45,10 +45,10 @@ ImageDataGenerator(rescale=1./255.,
 - RAdam
 - AdamW
 
-optimizer로는 오직 adam의 변형들만 고려하였다.<br/>
-대부분의 후보 모델에서 adam보다 nadam이 더 빨리 loss를 줄여나갔으며,<br/>
-마감일이 임박했을 때, RAdam와 AdamW 등의 비교적 낯선(?) optimizer를 추가적으로 시도해 보았으나<br/>
-Adam과 Nadam등과 정밀한 성능비교를 해보지는 못했다.
+optimizer로는 Adam의 변형들만 고려하였다.<br/>
+대부분의 후보 모델에서 Adam보다 Nadam이 loss의 감소가 빨랐으며,<br/>
+마감이 임박했을 때, RAdam와 AdamW 등의 optimizer를 추가적으로 시도해 보았으나 큰 차이는 없었으며<br/>
+정밀한 성능비교를 해보지는 못했다.
 <br/><br/>
 
 ### 3.2 LR schedule
@@ -56,7 +56,7 @@ Adam과 Nadam등과 정밀한 성능비교를 해보지는 못했다.
 - Piecewise Constant Decaying
 - Performance based Decaying
 
-코사인감쇄+재시작, 구간별 고정 감쇄, 성능기반 감쇄 등의 방법으로 epoch별 학습률을 조절.<br/>
+위의 decaying 방법들로 epoch별 learning rate 조정.<br/>
 대부분의 후보모델 학습 진행과정에서 어느 정도 epoch 이후부터는 validation loss의 감소가 saturated 되던 현상이<br/>
 `Cosine Annealing with Warm Restarts` 를 적용함으로써 해소되는 듯 보였다.<br/>
 > 그러나 이러한 scheduling 전략들간의 차이와 각 전략이 모델성능에 미치는 영향력을 타당하게 판단/평가하기 위해서는<br/>
@@ -67,6 +67,8 @@ Adam과 Nadam등과 정밀한 성능비교를 해보지는 못했다.
 
 ### 3.3 Loss
 - Binary Cross Entropy
+multi-label binary classification task임으로 BCE를 이용.
+
 ### 3.4 Metrics
 - Binary Accuracy
 ### 3.5 others
@@ -78,11 +80,17 @@ Adam과 Nadam등과 정밀한 성능비교를 해보지는 못했다.
 
 ## 4. Prediction
 ### 4.1 Test Time Augmentation
+TTA를 하지 않았을때와 비교하여 제법 큰 성능차이가 있음을 확인(acc 약 1%)
+
 ### 4.2 Monte Carlo Dropout
 ### 4.3 Ensemble
+
 
 <br/><br/>
 
 ---
 
 ## Comment
+* task specific한 custom model을 정의하여 시도해보지 못한 아쉬움이 남음.
+* high level module들만을 그대로 사용하는 것이 아닌, 조금더 task에 적합한 low level custom module을 정의하여 적용해보려는 시도를 하지 않은것이 아쉬움. 
+* 메모리, training 시간 등의 문제로 기획은 하였으나 실험해보지는 못한 방법들에 대해 미련이 남음. (코랩프로 진작결제할걸)
