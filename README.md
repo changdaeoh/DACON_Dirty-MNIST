@@ -1,4 +1,4 @@
-# Monthly Dacon 12 - CV learning competition (작성중)
+# Monthly Dacon 12 - CV learning competition 
 > members : 조재훈, 오창대, 원희지 <br/>
 period : 2/3 ~ 3/1 <br/>
 collaborative tool : Notion, Google Drive, Google Colab, Github <br/>
